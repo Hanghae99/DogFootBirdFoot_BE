@@ -8,6 +8,10 @@ class DogFootBirdFootBeApplicationTests {
 
     @Test
     void contextLoads() {
+        //given
+        //then
+        //when
+
     }
 
 }
