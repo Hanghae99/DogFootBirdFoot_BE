@@ -5,7 +5,6 @@ import com.hanghae.dogfootbirdfoot_be.model.Post;
 import com.hanghae.dogfootbirdfoot_be.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 
@@ -25,4 +24,6 @@ public class PostService {
         postRepository.save(post);
         return postRequestDto;
     }
+
+
 }
