@@ -19,9 +19,9 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping("/api/post/write")
-    public void createPost(@RequestBody PostRequestDto postRequestDto, @RequestParam List<MultipartFile> multipartFile){
+    public void createPost(@RequestParam PostRequestDto postRequestDto){
 
-        postService.createPost(postRequestDto, multipartFile);
+        postService.createPost(postRequestDto);
     }
 
 }

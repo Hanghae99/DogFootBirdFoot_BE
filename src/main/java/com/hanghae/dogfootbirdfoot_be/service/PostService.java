@@ -15,7 +15,7 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional
-    public PostRequestDto createPost(PostRequestDto postRequestDto, MultipartFile multipartFile){
+    public PostRequestDto createPost(PostRequestDto postRequestDto){
         String category = postRequestDto.getCategory();
         String postTitle = postRequestDto.getPostTitle();
         String postContents = postRequestDto.getPostContents();
