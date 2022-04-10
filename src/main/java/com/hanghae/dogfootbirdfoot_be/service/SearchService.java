@@ -5,7 +5,6 @@ import com.hanghae.dogfootbirdfoot_be.dto.SearchRequestDto;
 import com.hanghae.dogfootbirdfoot_be.model.Post;
 import com.hanghae.dogfootbirdfoot_be.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -32,7 +31,8 @@ public class SearchService {
             throw new IllegalArgumentException("검색어를 입력해주세요.");
         }
 
-        List<Post> results = postRepository.findByPostTitleContaining(searchWord);
+        //List<Post> results = postRepository.findByPostTitleContaining(searchWord);
+        List<Post> results = postRepository.findAllSearch(searchWord);
         List<PostDto> show = new ArrayList<>();
               // DTO
         for(Post result:results){
