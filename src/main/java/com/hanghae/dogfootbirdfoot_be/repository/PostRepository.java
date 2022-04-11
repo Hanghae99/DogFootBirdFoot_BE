@@ -9,12 +9,14 @@ import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findByCategoryOrderByModifiedAtDesc(String category);
-    //List<Post> findByPostTitleContaining(String searchWord);
     Optional<Post> findById(Long Id);
 
-    @Query(value = "SELECT b FROM Post b WHERE b.postTitle LIKE %:searchWord%")
+    @Query(value = "SELECT b FROM Post b WHERE b.postTitle LIKE %:searchWord% OR b.postContents LIKE %:searchWord% ORDER BY b.modifiedAt DESC")
     List<Post> findAllSearch(String searchWord);
 
 
+// "SELECT b FROM Post b WHERE b.postTitle LIKE %:searchWord% OR b.postContents LIKE %:searchWord%"
 
+
+    //("SELECT p FROM Article p ORDER BY p.id DESC")
 }

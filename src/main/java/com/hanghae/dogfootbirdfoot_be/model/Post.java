@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Entity
-
+//게시물 생성이랑 동일 해야함
 public class Post extends Timestamped{
 
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,13 +31,20 @@ public class Post extends Timestamped{
     @Column(nullable = false)
     private String nickName;
 
+//
+//    @OneToMany(mappedBy = "comment")
+//    private List<Comment> commentList = new ArrayList<Comment>();
+////
+//    @ManyToOne
+//    @JoinColumn(name = "User_Id", nullable = false)
+//    private User = user;
+//
     public Post(String category, String postTitle, String postContents, String nickName) {
         this.category = category;
         this.postTitle = postTitle;
         this.postContents = postContents;
         this.nickName = nickName;
     }
-
 
 //좋아요
 //    @JsonIgnoreProperties({"post"})

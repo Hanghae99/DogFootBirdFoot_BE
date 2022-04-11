@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -23,18 +24,22 @@ public class SearchService {
     public List<PostDto> search(SearchRequestDto searchRequestDto){
         String category = searchRequestDto.getCategory();
         String searchWord = searchRequestDto.getSearchWord();
+        //유효성
         if(category.isEmpty()){
             throw new IllegalArgumentException("카테고리를 정해주세요.");
         }
 
+
         if(searchWord.isEmpty()){
             throw new IllegalArgumentException("검색어를 입력해주세요.");
         }
+        //1차로 검색어 들어간 것 찾기
 
-        //List<Post> results = postRepository.findByPostTitleContaining(searchWord);
         List<Post> results = postRepository.findAllSearch(searchWord);
         List<PostDto> show = new ArrayList<>();
-              // DTO
+
+        //2차로 카테고리 동일한지 비교
+        //
         for(Post result:results){
             if(category.equals(result.getCategory())){
                 PostDto postDto = new PostDto(result);
@@ -42,6 +47,10 @@ public class SearchService {
             }
         }
         return show;
+
+
+
+
 
 //        List<Post> search = postRepository.findByTitleContainingAndCategory(searchWord, category);
 //        return search;

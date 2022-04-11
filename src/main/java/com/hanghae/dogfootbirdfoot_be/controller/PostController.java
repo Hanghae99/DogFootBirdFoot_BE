@@ -38,6 +38,8 @@ public class PostController {
     //게시글 조회
     @GetMapping("/api/board/{category}")
     public List<PostDto> getPosts(@PathVariable("category") String category) {
+        //서비스로 옮김
+
 //        if(category.isEmpty()){
 //            throw new IllegalArgumentException("카테고리를 정해주세요.");
 //        }

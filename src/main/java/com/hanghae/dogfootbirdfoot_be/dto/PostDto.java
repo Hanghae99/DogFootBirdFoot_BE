@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-
+//프로필이랑 코멘트 갯수 받으려면 필요
 public class PostDto {
     private Long postId;
     private String category;
@@ -21,7 +21,7 @@ public class PostDto {
     private String userProfile;
     private String nickName;
     private LocalDateTime createAt;
-   // private Long commentCount;
+    private Long commentCount;
 
     public PostDto(Post result) {
         this.postId = result.getId();
@@ -30,7 +30,7 @@ public class PostDto {
         this.postContents = result.getPostContents();
         this.createAt = result.getCreatedAt();
         this.nickName = result.getNickName();
-        //this.userProfile = getUser().getUserPrifile();
-        //this.commentCount = getComment.size();
+        //this.userProfile = result.getUser().getUserPrifile();
+        //this.commentCount = result.getCommentList.size();
     }
 }

@@ -17,6 +17,7 @@ public class DogFootBirdFootBeApplication {
     public static void main(String[] args) {
         SpringApplication.run(DogFootBirdFootBeApplication.class, args);
     }
+    //타임 스탬프 때문에 추가
     @PostConstruct
     public void started() { System.setProperty("user.timezone", "Asia/Seoul");
         TimeZone tz = TimeZone.getTimeZone("Asia/Seoul"); TimeZone.setDefault(tz);
