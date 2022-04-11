@@ -2,6 +2,7 @@ package com.hanghae.dogfootbirdfoot_be.controller;
 
 
 import com.hanghae.dogfootbirdfoot_be.dto.PostRequestDto;
+import com.hanghae.dogfootbirdfoot_be.dto.PostResponseDto;
 import com.hanghae.dogfootbirdfoot_be.service.PostService;
 import com.hanghae.dogfootbirdfoot_be.service.S3Uploader;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,11 @@ public class PostController {
     public PostRequestDto  createPost(@RequestBody PostRequestDto postRequestDto){
         return postService.createPost(postRequestDto);
 
+    }
+
+    @GetMapping("/api/post/detail/{postId}")
+    public PostResponseDto getPost(@PathVariable Long postId){
+       return postService.getPost(postId);
     }
 
 }

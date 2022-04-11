@@ -6,13 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity
 public class Post extends Timestamped{
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
@@ -28,14 +30,16 @@ public class Post extends Timestamped{
     @Column(nullable = true)
     private String imageUrl;
 
-    @Column(nullable = false)
-    private String nickname;
+//
+//    @OneToMany(mappedBy = "comment")
+//    private List<Comment> commentList = new ArrayList<Comment>();
 
+//    @ManyToOne
+//    private User user;
 
     public Post (PostRequestDto postRequestDto){
         this.category = postRequestDto.getCategory();
         this.postTitle = postRequestDto.getPostTitle();
         this.postContents = postRequestDto.getPostContents();
-        this.nickname = postRequestDto.getNickname();
     }
 }
