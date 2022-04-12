@@ -1,6 +1,7 @@
 package com.hanghae.dogfootbirdfoot_be.repository;
 
 import com.hanghae.dogfootbirdfoot_be.model.Post;
+<<<<<<< HEAD
 import com.hanghae.dogfootbirdfoot_be.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,4 +20,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findAllSearch(String searchWord);
 
 
+=======
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PostRepository extends JpaRepository<Post, Long> {
+>>>>>>> origin/write
 }

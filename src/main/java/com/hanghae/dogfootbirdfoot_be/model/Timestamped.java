@@ -1,5 +1,9 @@
 package com.hanghae.dogfootbirdfoot_be.model;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/write
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -15,8 +19,13 @@ import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 @Getter
+<<<<<<< HEAD
 @MappedSuperclass // Entity가 자동으로 컬럼으로 인식합니다.
 @EntityListeners(AuditingEntityListener.class) // 생성/변경 시간을 자동으로 업데이트합니다.
+=======
+@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+>>>>>>> origin/write
 public abstract class Timestamped {
     @CreatedDate // 최초 생성 시점
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -29,4 +38,8 @@ public abstract class Timestamped {
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime modifiedAt;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/write
