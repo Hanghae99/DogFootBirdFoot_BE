@@ -28,9 +28,9 @@ public class PostController {
         String category = postRequestDto.getCategory();
         String postTitle = postRequestDto.getPostTitle();
         String postContents = postRequestDto.getPostContents();
-        String nickName = postRequestDto.getNickName();
+        //String nickName = postRequestDto.getNickName();
 
-        Post post = new Post(category, postTitle,postContents, nickName);
+        Post post = new Post(category, postTitle,postContents);
         postRepository.save(post);
         return post;
 
