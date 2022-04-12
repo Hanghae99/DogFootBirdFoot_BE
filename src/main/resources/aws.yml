@@ -1,8 +1,8 @@
 cloud:
   aws:
     credentials:
-      accessKey: AKIASP764BG4MBHJTNH7
-      secretKey: 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
+      accessKey: 
+      secretKey: 
     s3:
       bucket: dogfoot-birdfoot-bucket
     region:
