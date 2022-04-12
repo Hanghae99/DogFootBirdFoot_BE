@@ -29,15 +29,15 @@ public class Post extends Timestamped{
     @Column(nullable = false)
     private String postContents;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", nullable = false)//변경
-//    private User user;
-//
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)//변경
+    private User user;
+
 //
 //    @OneToMany(mappedBy = "post")//ㅂㅕㄴ경
 //    private List<Comment> commentList;
-    //= new ArrayList<Comment>();
-//
+//    = new ArrayList<Comment>();
+
 
 
 
