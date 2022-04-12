@@ -28,20 +28,22 @@ public class Post extends Timestamped{
     @Column(nullable = false)
     private String postContents;
 
+    @Column(nullable = false)
+    private String nickName;
 
+//
 //    @OneToMany(mappedBy = "comment")
-//    private List<Comment> commentList;
-//    //= new ArrayList<Comment>();
+//    private List<Comment> commentList = new ArrayList<Comment>();
 ////
 //    @ManyToOne
 //    @JoinColumn(name = "User_Id", nullable = false)
 //    private User = user;
 //
-    public Post(String category, String postTitle, String postContents) {
+    public Post(String category, String postTitle, String postContents, String nickName) {
         this.category = category;
         this.postTitle = postTitle;
         this.postContents = postContents;
-        //this.nickName = nickName;
+        this.nickName = nickName;
     }
 
 //좋아요
@@ -50,7 +52,9 @@ public class Post extends Timestamped{
 //    private List<Likes> likesList;
 
     }
-
+//manytoone
+//USER??
+    //comment??//onetomany
 
 
 
