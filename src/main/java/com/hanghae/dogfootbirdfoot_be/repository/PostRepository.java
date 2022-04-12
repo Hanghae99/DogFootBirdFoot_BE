@@ -1,13 +1,8 @@
 package com.hanghae.dogfootbirdfoot_be.repository;
 
-import com.hanghae.dogfootbirdfoot_be.model.Post;
-import com.hanghae.dogfootbirdfoot_be.model.User;
-import com.hanghae.dogfootbirdfoot_be.model.UserDetailsImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
     Page<Post> findAllByUserOrderByCreatedAtDesc(User user, Pageable pageable);
