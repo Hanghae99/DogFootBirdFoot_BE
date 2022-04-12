@@ -2,6 +2,7 @@ package com.hanghae.dogfootbirdfoot_be.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.hanghae.dogfootbirdfoot_be.dto.PostRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,17 +30,15 @@ public class Post extends Timestamped{
     @Column(nullable = false)
     private String postContents;
 
+    @Column(nullable = true)
+    private String imageUrl;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)//변경
     private User user;
 
-//
-//    @OneToMany(mappedBy = "post")//ㅂㅕㄴ경
-//    private List<Comment> commentList;
-//    = new ArrayList<Comment>();
-
-
-
+    @OneToMany(mappedBy = "post")//ㅂㅕㄴ경
+    private List<Comment> commentList;
 
 
 //    @ManyToOne
@@ -52,10 +51,10 @@ public class Post extends Timestamped{
         this.postContents = postContents;
         //this.nickName = nickName;
     }
-
-//좋아요
-//    @JsonIgnoreProperties({"post"})
-//    @OneToMany(mappedBy = "post")
-//    private List<Likes> likesList;
+    public Post (PostRequestDto postRequestDto){
+        this.category = postRequestDto.getCategory();
+        this.postTitle = postRequestDto.getPostTitle();
+        this.postContents = postRequestDto.getPostContents();
+    }
 
 }

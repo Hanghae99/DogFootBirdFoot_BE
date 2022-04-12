@@ -1,9 +1,9 @@
 package com.hanghae.dogfootbirdfoot_be.controller;
 
 import com.hanghae.dogfootbirdfoot_be.dto.PostDto;
-//import com.hanghae.dogfootbirdfoot_be.dto.PostRequestDto;
+import com.hanghae.dogfootbirdfoot_be.dto.PostRequestDto;
+import com.hanghae.dogfootbirdfoot_be.dto.PostResponseDto;
 import com.hanghae.dogfootbirdfoot_be.dto.SearchRequestDto;
-import com.hanghae.dogfootbirdfoot_be.model.Post;
 import com.hanghae.dogfootbirdfoot_be.repository.PostRepository;
 import com.hanghae.dogfootbirdfoot_be.service.PostService;
 import com.hanghae.dogfootbirdfoot_be.service.SearchService;
@@ -39,7 +39,7 @@ public class PostController {
     @GetMapping("/api/board/{category}")
     public List<PostDto> getPosts(@PathVariable("category") String category) {
 
-        return postService.getPost(category);
+        return postService.getPosts(category);
     }
 
     //검색한 것 조회
@@ -61,6 +61,18 @@ public class PostController {
 //        //서비스로 보내서 해결하기
 //        return searchService.search(searchRequestDto);
 //    }
+
+    @PostMapping("/api/post/write")
+    public PostRequestDto createPost(@RequestBody PostRequestDto postRequestDto){
+        return postService.createPost(postRequestDto);
+
+    }
+
+    @GetMapping("/api/post/detail/{postId}")
+    public PostResponseDto getPost(@PathVariable Long postId){
+        return postService.getPost(postId);
+    }
+
 
 
 }
