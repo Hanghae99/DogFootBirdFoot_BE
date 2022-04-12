@@ -1,0 +1,11 @@
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIASP764BG4FMGXV5FJ
+      secretKey: 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
+    s3:
+      bucket: dogfoot-birdfoot-bucket
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
