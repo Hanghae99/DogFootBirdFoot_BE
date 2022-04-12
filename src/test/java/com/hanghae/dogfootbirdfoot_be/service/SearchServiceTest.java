@@ -45,10 +45,10 @@ class SearchServiceTest {
     private String postContents4 = "내용4";
     private String nickName4 = "닉네임4";
 
-    Post post1 = new Post(category1,postTitle1,postContents1);
-    Post post2 = new Post(category2,postTitle2,postContents2);
-    Post post3 = new Post(category3,postTitle3,postContents3);
-    Post post4 = new Post(category4,postTitle4,postContents4);
+    Post post1 = new Post(category1,postTitle1,postContents1,nickName1);
+    Post post2 = new Post(category2,postTitle2,postContents2,nickName2);
+    Post post3 = new Post(category3,postTitle3,postContents3,nickName3);
+    Post post4 = new Post(category4,postTitle4,postContents4,nickName4);
 
     List<Post> postList = new ArrayList<>();
     List<PostDto> postDtoList = new ArrayList<>();

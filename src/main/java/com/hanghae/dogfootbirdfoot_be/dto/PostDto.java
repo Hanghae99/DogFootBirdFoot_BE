@@ -1,6 +1,5 @@
 package com.hanghae.dogfootbirdfoot_be.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.hanghae.dogfootbirdfoot_be.model.Post;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +20,6 @@ public class PostDto {
     private String postContents;
     private String userProfile;
     private String nickName;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createAt;
     private Long commentCount;
 
@@ -31,9 +29,8 @@ public class PostDto {
         this.postTitle = result.getPostTitle();
         this.postContents = result.getPostContents();
         this.createAt = result.getCreatedAt();
-       //this.nickName = result.getUser.getNickName();
+        this.nickName = result.getNickName();
         //this.userProfile = result.getUser().getUserPrifile();
         //this.commentCount = result.getCommentList.size();
-
     }
 }
