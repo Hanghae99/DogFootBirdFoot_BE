@@ -40,9 +40,9 @@ class PostServiceTest {
     private String postContents3 = "내용3";
     private String nickName3 = "닉네임3";
 
-    Post post1 = new Post(category1,postTitle1,postContents1,nickName1);
-    Post post2 = new Post(category2,postTitle2,postContents2,nickName2);
-    Post post3 = new Post(category3,postTitle3,postContents3,nickName3);
+    Post post1 = new Post(category1,postTitle1,postContents1);
+    Post post2 = new Post(category2,postTitle2,postContents2);
+    Post post3 = new Post(category3,postTitle3,postContents3);
 
     List<Post> postList = new ArrayList<>();
 
