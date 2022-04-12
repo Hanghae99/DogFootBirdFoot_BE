@@ -107,7 +107,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public FormLoginFilter formLoginFilter() throws Exception {
         FormLoginFilter formLoginFilter = new FormLoginFilter(authenticationManager());
-        formLoginFilter.setFilterProcessesUrl("/user/login");
+        formLoginFilter.setFilterProcessesUrl("/api/user/login");
         formLoginFilter.setAuthenticationSuccessHandler(formLoginSuccessHandler());
         formLoginFilter.afterPropertiesSet();
         return formLoginFilter;
@@ -127,8 +127,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         List<String> skipPathList = new ArrayList<>();
 
         // Static 정보 접근 허용
-//        skipPathList.add("GET,/images/**");
-//        skipPathList.add("GET,/css/**");
+        skipPathList.add("GET,/images/**");
+        skipPathList.add("GET,/css/**");
 
         // h2-console 허용
         skipPathList.add("GET,/h2-console/**");
@@ -136,7 +136,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 회원 관리 API 허용
         skipPathList.add("GET,/api/user/**");
         skipPathList.add("POST,/api/user/signup");
-        skipPathList.add("GET,/api/user/login");
+        skipPathList.add("GET,/user/login");
+        skipPathList.add("GET,/api/user/dupliChk");
+        skipPathList.add("POST,/api/user/dupliChk");
         // 메인 페이지
        // skipPathList.add("GET,/api/home");
 
@@ -171,6 +173,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.addExposedHeader("Authorization");
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
