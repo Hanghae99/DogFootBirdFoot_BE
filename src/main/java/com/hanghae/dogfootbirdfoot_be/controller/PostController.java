@@ -22,37 +22,24 @@ public class PostController {
     private final PostService postService;
 
 
-    //게시글 생성
-    @PostMapping("/api/board")
-    public Post createBlog(@RequestBody PostRequestDto postRequestDto){
-        String category = postRequestDto.getCategory();
-        String postTitle = postRequestDto.getPostTitle();
-        String postContents = postRequestDto.getPostContents();
-        String nickName = postRequestDto.getNickName();
-
-        Post post = new Post(category, postTitle,postContents, nickName);
-        postRepository.save(post);
-        return post;
-
-    }
+//    //게시글 생성
+//    @PostMapping("/api/board")
+//    public Post createBlog(@RequestBody PostRequestDto postRequestDto){
+//        String category = postRequestDto.getCategory();
+//        String postTitle = postRequestDto.getPostTitle();
+//        String postContents = postRequestDto.getPostContents();
+//        //String nickName = postRequestDto.getNickName();
+//
+//        Post post = new Post(category, postTitle,postContents);
+//        postRepository.save(post);
+//        return post;
+//
+//    }
+//
     //게시글 조회
     @GetMapping("/api/board/{category}")
     public List<PostDto> getPosts(@PathVariable("category") String category) {
-        //서비스로 옮김
 
-//        if(category.isEmpty()){
-//            throw new IllegalArgumentException("카테고리를 정해주세요.");
-//        }
-//
-//        List<Post> posts = postRepository.findByCategoryOrderByModifiedAtDesc(category);
-//
-//        //여기서 부터 오류남 해결해야됨 null값 출력//해결
-//        List<PostDto> postAll = new ArrayList<>();
-//        for (Post post:posts){
-//            PostDto postDto = new PostDto(post);
-//            postAll.add(postDto);
-//        }
-//        return postAll;
         return postService.getPost(category);
     }
 
