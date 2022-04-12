@@ -1,20 +1,14 @@
 package com.hanghae.dogfootbirdfoot_be.model;
 
 
-<<<<<<< HEAD
 import com.hanghae.dogfootbirdfoot_be.dto.SignupRequestDto;
-=======
->>>>>>> origin/write
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-<<<<<<< HEAD
 import java.util.List;
 
-=======
->>>>>>> origin/write
 
 @Getter
 @NoArgsConstructor
@@ -23,20 +17,13 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< HEAD
     @Column(name = "user_id")
-=======
->>>>>>> origin/write
     private Long userId;
 
     @Column(nullable = false)
     private String username;
 
-<<<<<<< HEAD
-    @Column(nullable = true)
-=======
     @Column(nullable = false)
->>>>>>> origin/write
     private String email;
 
     @Column(nullable = false)
@@ -45,7 +32,6 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-<<<<<<< HEAD
     @Column(nullable = true)
     private String userProfile;
 
@@ -72,10 +58,4 @@ public class User {
     }
 }
 
-=======
-    @Column(nullable = false)
-    private String userProfile;
 
-
-}
->>>>>>> origin/write

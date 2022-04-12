@@ -3,10 +3,12 @@ package com.hanghae.dogfootbirdfoot_be.dto;
 
 import com.hanghae.dogfootbirdfoot_be.model.Post;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 public class PostResponseDto {
     private Long postId;
     private String category;

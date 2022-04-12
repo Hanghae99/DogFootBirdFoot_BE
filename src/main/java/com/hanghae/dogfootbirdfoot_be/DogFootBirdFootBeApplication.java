@@ -2,6 +2,7 @@ package com.hanghae.dogfootbirdfoot_be;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.annotation.PostConstruct;
@@ -14,8 +15,12 @@ import java.util.TimeZone;
 @SpringBootApplication
 public class DogFootBirdFootBeApplication {
 
+    public static final String APPLICATION_LOCATIONS = "spring.config.location="
+            + "classpath:application.properties,"
+            + "classpath:aws.yml";
+
     public static void main(String[] args) {
-        SpringApplication.run(DogFootBirdFootBeApplication.class, args);
+        SpringApplication.run(DogFootBirdFootBeApplication.class, args).;
     }
     //타임 스탬프 때문에 추가
     @PostConstruct
@@ -24,5 +29,16 @@ public class DogFootBirdFootBeApplication {
         System.out.println("현재시각:" + new Date());
         System.out.println(
                 ZonedDateTime.now(ZoneId.of("Asia/Seoul"))); }
+
+
+
+
+    public static void main(String[] args){
+        new SpringApplicationBuilder(DogFootBirdFootBeApplication.class)
+                .properties(APPLICATION_LOCATIONS)
+                .run(args);
+    }
+
+
 
 }

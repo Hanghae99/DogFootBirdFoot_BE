@@ -3,7 +3,7 @@ package com.hanghae.dogfootbirdfoot_be.controller;
 
 import com.hanghae.dogfootbirdfoot_be.dto.CommentRequestDto;
 import com.hanghae.dogfootbirdfoot_be.dto.CommentResponseDto;
-import com.hanghae.dogfootbirdfoot_be.repository.CommentRepositroy;
+import com.hanghae.dogfootbirdfoot_be.repository.CommentRepository;
 import com.hanghae.dogfootbirdfoot_be.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.List;
 public class CommentController {
 
     private final CommentService commentService;
-    private final CommentRepositroy commentRepositroy;
+    private final CommentRepository commentRepository;
 
     // 댓글 작성
     @PostMapping("/api/post/detail/{postId}/comment")

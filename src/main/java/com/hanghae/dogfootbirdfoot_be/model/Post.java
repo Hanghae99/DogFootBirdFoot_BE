@@ -1,39 +1,22 @@
 package com.hanghae.dogfootbirdfoot_be.model;
 
 
-<<<<<<< HEAD
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Builder;
-=======
 import com.hanghae.dogfootbirdfoot_be.dto.PostRequestDto;
->>>>>>> origin/write
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-<<<<<<< HEAD
 import java.util.List;
 
-@NoArgsConstructor
-@Getter
-@Entity
 //게시물 생성이랑 동일 해야함
-=======
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity
->>>>>>> origin/write
 public class Post extends Timestamped{
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-<<<<<<< HEAD
     @Column//(name = "post_id")//변경
-=======
->>>>>>> origin/write
     private Long id;
 
     @Column(nullable = false)
@@ -45,19 +28,15 @@ public class Post extends Timestamped{
     @Column(nullable = false)
     private String postContents;
 
-<<<<<<< HEAD
+    @Column(nullable = true)
+    private String imageUrl;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)//변경
     private User user;
 
-//
-//    @OneToMany(mappedBy = "post")//ㅂㅕㄴ경
-//    private List<Comment> commentList;
-//    = new ArrayList<Comment>();
-
-
-
-
+    @OneToMany(mappedBy = "post")//ㅂㅕㄴ경
+    private List<Comment> commentList;
 
 //    @ManyToOne
 //    @JoinColumn(name = "user_id", nullable = false)
@@ -70,17 +49,6 @@ public class Post extends Timestamped{
         //this.nickName = nickName;
     }
 
-//좋아요
-//    @JsonIgnoreProperties({"post"})
-//    @OneToMany(mappedBy = "post")
-//    private List<Likes> likesList;
-
-}
-=======
-    @Column(nullable = true)
-    private String imageUrl;
-
-//
 //    @OneToMany(mappedBy = "comment")
 //    private List<Comment> commentList = new ArrayList<Comment>();
 
@@ -93,4 +61,3 @@ public class Post extends Timestamped{
         this.postContents = postRequestDto.getPostContents();
     }
 }
->>>>>>> origin/write

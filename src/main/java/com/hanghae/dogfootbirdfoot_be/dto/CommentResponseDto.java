@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Getter
 public class CommentResponseDto {
-    private String nickname;
+    private  String nickname;
     private String comments;
     private String userProfile;
     private LocalDateTime createdAt;
