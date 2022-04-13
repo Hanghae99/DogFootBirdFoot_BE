@@ -3,7 +3,9 @@ package com.hanghae.dogfootbirdfoot_be.service;
 
 import com.hanghae.dogfootbirdfoot_be.dto.PostDto;
 import com.hanghae.dogfootbirdfoot_be.dto.SearchRequestDto;
+import com.hanghae.dogfootbirdfoot_be.model.Comment;
 import com.hanghae.dogfootbirdfoot_be.model.Post;
+import com.hanghae.dogfootbirdfoot_be.repository.CommentRepositroy;
 import com.hanghae.dogfootbirdfoot_be.repository.PostRepository;
 import com.hanghae.dogfootbirdfoot_be.validator.ServiceValidator;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.List;
 @Service
 public class SearchService {
     private final PostRepository postRepository;
+    private final CommentRepositroy commentRepository;
 //    public SearchService(PostRepository postRepository) {
 //        this.postRepository = postRepository;
 //    }
@@ -37,10 +40,13 @@ public class SearchService {
         //
         for(Post result:results){
             if(category.equals(result.getCategory())){
-                PostDto postDto = new PostDto(result);
+                List<Comment> commentNum = commentRepository.findAllByPostId(result);
+                int commentCount = commentNum.size();
+                PostDto postDto = new PostDto(result,commentCount);
                 show.add(postDto);
             }
         }
+
         return show;
 
 

@@ -4,8 +4,10 @@ import com.hanghae.dogfootbirdfoot_be.dto.PostDeleteRequestDto;
 import com.hanghae.dogfootbirdfoot_be.dto.PostDto;
 import com.hanghae.dogfootbirdfoot_be.dto.PostRequestDto;
 import com.hanghae.dogfootbirdfoot_be.dto.PostResponseDto;
+import com.hanghae.dogfootbirdfoot_be.model.Comment;
 import com.hanghae.dogfootbirdfoot_be.model.Post;
 import com.hanghae.dogfootbirdfoot_be.model.User;
+import com.hanghae.dogfootbirdfoot_be.repository.CommentRepositroy;
 import com.hanghae.dogfootbirdfoot_be.repository.PostRepository;
 import com.hanghae.dogfootbirdfoot_be.validator.ServiceValidator;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,8 @@ import java.util.List;
 @Service
 public class PostService {
     private final PostRepository postRepository;
+    private final CommentRepositroy commentRepository;
+
 
     // 게시물 전체 조회
     @Transactional
@@ -34,7 +38,10 @@ public class PostService {
 
         List<PostDto> postAll = new ArrayList<>();
         for (Post post:posts){
-            PostDto postDto = new PostDto(post);
+            List<Comment> commentNum = commentRepository.findAllByPostId(post);
+            int commentCount = commentNum.size();
+            PostDto postDto = new PostDto(post,commentCount);
+
             postAll.add(postDto);
         }
         return postAll;
