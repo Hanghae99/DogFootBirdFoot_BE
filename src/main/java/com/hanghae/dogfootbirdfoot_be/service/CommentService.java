@@ -3,6 +3,7 @@ package com.hanghae.dogfootbirdfoot_be.service;
 
 import com.hanghae.dogfootbirdfoot_be.dto.CommentRequestDto;
 import com.hanghae.dogfootbirdfoot_be.dto.CommentResponseDto;
+import com.hanghae.dogfootbirdfoot_be.dto.CommentWriteResponseDto;
 import com.hanghae.dogfootbirdfoot_be.model.Comment;
 import com.hanghae.dogfootbirdfoot_be.model.Post;
 import com.hanghae.dogfootbirdfoot_be.model.User;
@@ -29,15 +30,16 @@ public class CommentService {
 
     // 댓글 작성
     @Transactional
-    public CommentRequestDto createComment(CommentRequestDto commentRequestDto, Long postId, User user){
+    public CommentWriteResponseDto createComment(CommentRequestDto commentRequestDto, Long postId, User user){
         String comment = commentRequestDto.getComment();
         ServiceValidator.validateComment(comment);
         Post post = postRepository.findById(postId)
                 .orElseThrow(
                 () -> new IllegalArgumentException("no data"));
-        Comment comments = new Comment(commentRequestDto, post);
-        OptionalSaveChk(commentRepositroy.save(comments));
-        return commentRequestDto;
+        Comment comments = new Comment(commentRequestDto, post,user);
+        Comment saveComment = commentRepositroy.save(comments);
+        HashMap<String,String> statusComment = OptionalSaveChk(saveComment);
+        return new CommentWriteResponseDto(statusComment,saveComment);
     }
 
     // 댓글 조회
@@ -98,10 +100,13 @@ public class CommentService {
             hashMap.put("msg", "댓글 수정에 실패하였습니다.");
             return hashMap;
         }
-
-        // 페이징
-//        public Page<Comment> getMyComments(User user) {
-//            return commentRepository.findAllByUserOrderByCreatedAtDesc(user, PageRequest.of(0,5));
-//        }
     }
+
+    //내 댓글 조회 2022-04-13
+    public Comment getMycommentLists(Long userId) {
+        return commentRepositroy.findById(userId).orElseThrow(
+                NullPointerException::new
+        );
+    }
+
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+
 @RestController
 public class UserController {
 
@@ -27,20 +29,9 @@ public class UserController {
     }
 
     @PostMapping ("/api/user/dupliChk")
-    public String userDupliChk(
-            @RequestBody IdDuplicate idDuplicate
-           // @RequestParam("username") String username
-           // @PathVariable String param
-    ){
-        //System.out.println("RequestParam " + username);
+    public HashMap<String,String> userDupliChk(@RequestBody IdDuplicate idDuplicate){
         System.out.println("아이디 중복 확인 "+idDuplicate.getUsername());
-        if(userService.userDupliChk(idDuplicate.getUsername()).get("result").equals("true")){
-            return "true";
-        }else{
-            return "false";
-        }
-
-
+        return userService.userDupliChk(idDuplicate.getUsername());
     }
 
 

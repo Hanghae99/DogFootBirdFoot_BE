@@ -1,5 +1,6 @@
 package com.hanghae.dogfootbirdfoot_be.controller;
 
+import com.hanghae.dogfootbirdfoot_be.model.Comment;
 import com.hanghae.dogfootbirdfoot_be.model.Post;
 import com.hanghae.dogfootbirdfoot_be.security.UserDetailsImpl;
 import com.hanghae.dogfootbirdfoot_be.service.CommentService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 @RequiredArgsConstructor
@@ -35,8 +37,28 @@ public class MyPageController {
 
     //내가 작성한 게시물 가져오기.
     @GetMapping("/mypage/mypost")
-    public Page<Post> getMyposts(@AuthenticationPrincipal UserDetailsImpl userDetails){
-        return postService.getMypostLists(userDetails.getUser());
+    public Map<String, Object> getMypost(@AuthenticationPrincipal UserDetailsImpl userDetails) throws BadCredentialsException {
+        Post post = postService.getMypostLists(userDetails.getUser().getUserId());
+        Map<String, Object> result = new HashMap<>();
+
+        result.put("postId", post.getId());
+        result.put("postTitle", post.getPostTitle());
+        result.put("createdAt", post.getCreatedAt());
+
+        return result;
+    }
+    //내 댓글 조회 2022-04-13
+    @GetMapping("/mypage/mycomment")
+    public Map<String, Object> getMycomment(@AuthenticationPrincipal UserDetailsImpl userDetails) throws BadCredentialsException {
+        Comment comment = commentService.getMycommentLists(userDetails.getUser().getUserId());
+        Map<String, Object> result = new HashMap<>();
+
+        result.put("postId", comment.getPostId());
+        result.put("commentId", comment.getId());
+        result.put("comment", comment.getComments());
+        result.put("createdAt", comment.getCreatedAt());
+
+        return result;
     }
 
 //    @GetMapping("/api/mypage/{userId}/mypost")
