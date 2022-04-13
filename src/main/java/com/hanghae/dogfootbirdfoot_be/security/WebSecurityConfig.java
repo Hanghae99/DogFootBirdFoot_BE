@@ -138,8 +138,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         skipPathList.add("GET,/user/login");
         skipPathList.add("GET,/api/user/dupliChk");
         skipPathList.add("POST,/api/user/dupliChk");
+
         // 메인 페이지
-       // skipPathList.add("GET,/api/home");
+        skipPathList.add("GET,/api/board/**");
 
         skipPathList.add("GET,/");
         skipPathList.add("GET,/basic.js");

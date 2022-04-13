@@ -58,4 +58,12 @@ public class Post extends Timestamped{
         this.postContents = postContents;
         //this.nickName = nickName;
     }
+
+    public Post (PostRequestDto postRequestDto, User user){
+        this.category = postRequestDto.getCategory();
+        this.postTitle = postRequestDto.getPostTitle();
+        this.postContents = postRequestDto.getPostContents();
+        this.imageUrl = postRequestDto.getImageUrl();
+        this.user = user;
+    }
 }

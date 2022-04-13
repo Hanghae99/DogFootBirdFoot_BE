@@ -40,9 +40,9 @@ public class PostService {
     }
     // 게시글 작성
     @Transactional
-    public PostRequestDto createPost(PostRequestDto postRequestDto){
+    public PostRequestDto createPost(PostRequestDto postRequestDto, User user){
 //        Long userId = userDetails.getId;
-        Post post = new Post(postRequestDto);
+        Post post = new Post(postRequestDto,user);
         postRepository.save(post);
         return postRequestDto;
     }

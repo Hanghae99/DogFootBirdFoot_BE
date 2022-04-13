@@ -1,7 +1,9 @@
 package com.hanghae.dogfootbirdfoot_be.service;
 
 import com.hanghae.dogfootbirdfoot_be.dto.SignupRequestDto;
+import com.hanghae.dogfootbirdfoot_be.model.Comment;
 import com.hanghae.dogfootbirdfoot_be.model.User;
+import com.hanghae.dogfootbirdfoot_be.repository.CommentRepositroy;
 import com.hanghae.dogfootbirdfoot_be.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,7 +18,7 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
+    private final CommentRepositroy commentRepositroy;
     // 회원가입
     @Transactional
     public User userSignup(SignupRequestDto signupRequestDto)   {
@@ -33,9 +35,11 @@ public class UserService {
         HashMap<String,String> hashMap= new HashMap<>();
         if(userRepository.findByUsername(username).isPresent()){
             hashMap.put("result","false");
+            hashMap.put("msg" , "중복된 아이디 입니다.");
             return hashMap;
         }else{
             hashMap.put("result","true");
+            hashMap.put("msg" , "사용가능한 아이디입니다");
             return hashMap;
         }
     }
@@ -49,5 +53,21 @@ public class UserService {
             hashMap.put("result", "false");
         }
         return hashMap;
+    }
+
+
+    // comment id로 userId를 가져와서 로그인한 user와 같은지 체크
+    public HashMap<String,String> authChk(Long userId, Long commentId){
+        HashMap<String,String> hashMap = new HashMap<>();
+        Optional<Comment> comment = commentRepositroy.findById(commentId);
+
+        if(comment.get().getUserId().getUserId() == userId){
+            hashMap.put("result", "true");
+            return hashMap;
+        }else{
+            hashMap.put("result", "false");
+            return hashMap;
+        }
+
     }
 }
