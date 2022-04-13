@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLOutput;
 import java.util.Date;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ public class JwtDecoder {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public String decodeUsername(String token) {
+        System.out.println("토큰  : "  +token);
         DecodedJWT decodedJWT = isValidToken(token)
                 .orElseThrow(() -> new IllegalArgumentException("유효한 토큰이 아닙니다."));
 

@@ -75,11 +75,11 @@ public class PostController {
 //    }
 
 
-
-
     // 게시물 삭제 22.4.13 작성
     @DeleteMapping("/api/post/delete")
     public HashMap<String, String> deletePost(@RequestBody PostDeleteRequestDto postDeleteRequestDto){
+        System.out.println("게시글 아이디 : "+postDeleteRequestDto.getPostId());
+        System.out.println("유저 아이디   : "+postDeleteRequestDto.getUserId());
         return postService.deletePost(postDeleteRequestDto);
     }
 }

@@ -95,6 +95,12 @@ public class PostService {
         }
 
     }
+    //마이페이지 내 게시물 조회 2022-04-13
+    public Post getMypostLists(Long userId) {
+        return postRepository.findById(userId).orElseThrow(
+                NullPointerException::new
+        );
+    }
 
 
 }

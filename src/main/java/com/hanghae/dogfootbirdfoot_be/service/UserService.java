@@ -31,7 +31,7 @@ public class UserService {
        return userRepository.save(user);
     }
     // 아이디 중복체크
-    public HashMap userDupliChk(String username) {
+    public HashMap<String,String> userDupliChk(String username) {
         HashMap<String,String> hashMap= new HashMap<>();
         if(userRepository.findByUsername(username).isPresent()){
             hashMap.put("result","false");

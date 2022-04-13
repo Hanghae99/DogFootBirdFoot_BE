@@ -21,7 +21,7 @@ public class PostDto {
     private String postTitle;
     private String postContents;
     private String userProfile;
-    private String nickName;
+    private String nickname;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createAt;
     private int commentCount;
@@ -35,7 +35,7 @@ public class PostDto {
         this.postTitle = result.getPostTitle();
         this.postContents = result.getPostContents();
         this.createAt = result.getCreatedAt();
-        this.nickName = result.getUser().getNickname();
+        this.nickname = result.getUser().getNickname();
         this.userProfile = result.getUser().getUserProfile();
         this.commentCount =commentCount;
     }
