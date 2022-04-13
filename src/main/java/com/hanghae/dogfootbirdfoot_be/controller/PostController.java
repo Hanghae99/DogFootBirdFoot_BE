@@ -1,16 +1,17 @@
 package com.hanghae.dogfootbirdfoot_be.controller;
 
 
-import com.hanghae.dogfootbirdfoot_be.dto.PostDto;
-import com.hanghae.dogfootbirdfoot_be.dto.PostRequestDto;
-import com.hanghae.dogfootbirdfoot_be.dto.PostResponseDto;
-import com.hanghae.dogfootbirdfoot_be.dto.SearchRequestDto;
+import com.hanghae.dogfootbirdfoot_be.dto.*;
+import com.hanghae.dogfootbirdfoot_be.model.User;
+import com.hanghae.dogfootbirdfoot_be.security.UserDetailsImpl;
 import com.hanghae.dogfootbirdfoot_be.service.PostService;
 import com.hanghae.dogfootbirdfoot_be.service.S3Uploader;
 import com.hanghae.dogfootbirdfoot_be.service.SearchService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -24,8 +25,9 @@ public class PostController {
 
     // 게시물 작성
     @PostMapping("/api/post/write")
-    public PostRequestDto  createPost(@RequestBody PostRequestDto postRequestDto) {
-        return postService.createPost(postRequestDto);
+    public PostRequestDto  createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        User user = userDetails.getUser();
+        return postService.createPost(postRequestDto, user);
 
     }
 
@@ -48,5 +50,11 @@ public class PostController {
 
         //서비스로 보내서 해결하기
         return searchService.search(searchRequestDto);
+    }
+
+    // 게시물 삭제 22.4.13 작성
+    @DeleteMapping("/api/post/delete")
+    public HashMap<String, String> deletePost(@RequestBody PostDeleteRequestDto postDeleteRequestDto){
+        return postService.deletePost(postDeleteRequestDto);
     }
 }

@@ -46,11 +46,12 @@ public class Post extends Timestamped{
 //    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
 //    private List<Comment> commentList;
 
-    public Post (PostRequestDto postRequestDto){
+    public Post (PostRequestDto postRequestDto, User user){
         this.category = postRequestDto.getCategory();
         this.postTitle = postRequestDto.getPostTitle();
         this.postContents = postRequestDto.getPostContents();
         this.imageUrl = postRequestDto.getImageUrl();
+        this.user = user;
     }
     public Post(String category, String postTitle, String postContents) {
         this.category = category;

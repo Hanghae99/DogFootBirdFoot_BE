@@ -1,11 +1,11 @@
 package com.hanghae.dogfootbirdfoot_be.dto;
 
-
 import lombok.Getter;
 
-//22.4.13 CommentRequestDto 수정
+
+//22.4.13 게시글 삭제용 dto 생성
 @Getter
-public class CommentRequestDto {
-    private String comment;
+public class PostDeleteRequestDto {
     private Long userId;
+    private Long postId;
 }
