@@ -1,6 +1,10 @@
 package com.hanghae.dogfootbirdfoot_be.controller;
 
 
+import com.hanghae.dogfootbirdfoot_be.dto.PostDto;
+import com.hanghae.dogfootbirdfoot_be.dto.PostRequestDto;
+import com.hanghae.dogfootbirdfoot_be.dto.PostResponseDto;
+import com.hanghae.dogfootbirdfoot_be.dto.SearchRequestDto;
 import com.hanghae.dogfootbirdfoot_be.dto.*;
 import com.hanghae.dogfootbirdfoot_be.model.User;
 import com.hanghae.dogfootbirdfoot_be.security.UserDetailsImpl;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 @RequiredArgsConstructor
 @RestController
@@ -40,8 +45,13 @@ public class PostController {
     //게시글 조회
     @GetMapping("/api/board/{category}")
     public List<PostDto> getPosts(@PathVariable("category") String category) {
+        System.out.println("category  : " + category);
+        if(category.equals("") || category== null){
+            return postService.getPosts("JAVA");
+        }else{
+            return postService.getPosts(category);
+        }
 
-        return postService.getPosts(category);
     }
 
     //검색한 것 조회

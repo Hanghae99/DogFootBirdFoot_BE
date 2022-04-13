@@ -33,8 +33,8 @@ public class CommentService {
                 .orElseThrow(
                 () -> new IllegalArgumentException("no data"));
 
-        Comment comment = new Comment(commentRequestDto, post);
-        commentRepositroy.save(comment);
+        Comment comments = new Comment(commentRequestDto, post);
+        commentRepositroy.save(comments);
         return commentRequestDto;
     }
 

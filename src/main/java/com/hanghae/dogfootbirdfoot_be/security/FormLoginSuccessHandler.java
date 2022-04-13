@@ -19,9 +19,12 @@ public class FormLoginSuccessHandler extends SavedRequestAwareAuthenticationSucc
 
         // 헤더에 담아 보내는 방법과 바디에 담아보내는 방법 2가지가 있음.
         final String token = JwtTokenUtils.generateJwtToken(userDetails);
+
         // 헤더에 담음
         System.out.println(token);
+
         response.addHeader(AUTH_HEADER, TOKEN_TYPE + " " + token);
+
     }
 
 }

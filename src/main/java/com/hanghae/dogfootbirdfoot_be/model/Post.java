@@ -59,4 +59,6 @@ public class Post extends Timestamped{
         this.postContents = postContents;
         //this.nickName = nickName;
     }
+
+
 }
