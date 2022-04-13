@@ -7,6 +7,7 @@ import com.hanghae.dogfootbirdfoot_be.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -31,14 +32,16 @@ public class CommentController {
     }
 
     // 댓글 삭제
+    //22.4.13 댓글 삭제 수정
     @DeleteMapping("/api/post/detail/comment/{commentId}")
-    public void deleteComment(@PathVariable Long commentId){
-        commentService.deleteComment(commentId);
+    public HashMap<String, String> deleteComment(@PathVariable Long commentId, @RequestParam Long userId){
+        return commentService.deleteComment(commentId, userId);
     }
 
     //댓글 수정
+    //22.4.13 댓글 수정 수정
     @PutMapping("/api/post/detail/comment/{commentId}")
-    public void updateComment(@PathVariable Long commentId, @RequestParam CommentRequestDto commentRequestDto){
-        commentService.updateComment(commentId, commentRequestDto);
+    public HashMap<String, String> updateComment(@PathVariable Long commentId, @RequestParam CommentRequestDto commentRequestDto){
+        return commentService.updateComment(commentId, commentRequestDto);
     }
 }
