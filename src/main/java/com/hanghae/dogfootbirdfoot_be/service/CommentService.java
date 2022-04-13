@@ -5,6 +5,7 @@ import com.hanghae.dogfootbirdfoot_be.dto.CommentRequestDto;
 import com.hanghae.dogfootbirdfoot_be.dto.CommentResponseDto;
 import com.hanghae.dogfootbirdfoot_be.model.Comment;
 import com.hanghae.dogfootbirdfoot_be.model.Post;
+import com.hanghae.dogfootbirdfoot_be.model.User;
 import com.hanghae.dogfootbirdfoot_be.repository.CommentRepositroy;
 import com.hanghae.dogfootbirdfoot_be.repository.PostRepository;
 import com.hanghae.dogfootbirdfoot_be.validator.ServiceValidator;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.hanghae.dogfootbirdfoot_be.validator.ServiceValidator.OptionalSaveChk;
+
 @RequiredArgsConstructor
 @Service
 public class CommentService {
@@ -26,15 +29,14 @@ public class CommentService {
 
     // 댓글 작성
     @Transactional
-    public CommentRequestDto createComment(CommentRequestDto commentRequestDto, Long postId){
+    public CommentRequestDto createComment(CommentRequestDto commentRequestDto, Long postId, User user){
         String comment = commentRequestDto.getComment();
         ServiceValidator.validateComment(comment);
         Post post = postRepository.findById(postId)
                 .orElseThrow(
                 () -> new IllegalArgumentException("no data"));
-
         Comment comments = new Comment(commentRequestDto, post);
-        commentRepositroy.save(comments);
+        OptionalSaveChk(commentRepositroy.save(comments));
         return commentRequestDto;
     }
 
