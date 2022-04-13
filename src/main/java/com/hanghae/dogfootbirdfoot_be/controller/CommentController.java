@@ -3,8 +3,10 @@ package com.hanghae.dogfootbirdfoot_be.controller;
 import com.hanghae.dogfootbirdfoot_be.dto.CommentRequestDto;
 import com.hanghae.dogfootbirdfoot_be.dto.CommentResponseDto;
 import com.hanghae.dogfootbirdfoot_be.repository.CommentRepositroy;
+import com.hanghae.dogfootbirdfoot_be.security.UserDetailsImpl;
 import com.hanghae.dogfootbirdfoot_be.service.CommentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -18,9 +20,17 @@ public class CommentController {
     private final CommentRepositroy commentRepositroy;
 
     // 댓글 작성
+    //  2022.4.13 requestbody 수정
     @PostMapping("/api/post/detail/{postId}/comment")
-    public void createComment(@RequestParam CommentRequestDto commentRequestDto, @PathVariable Long postId){
-        commentService.createComment(commentRequestDto, postId);
+    public String createComment(@RequestBody CommentRequestDto commentRequestDto,
+                                @PathVariable Long postId,
+                                @AuthenticationPrincipal UserDetailsImpl userDetails
+
+                                ){
+        System.out.println("댓글 번호 : " + postId);
+        System.out.println("comment : " + commentRequestDto.getComment());
+        commentService.createComment(commentRequestDto, postId, userDetails.getUser());
+        return  "댓글 작성";
     }
 
 

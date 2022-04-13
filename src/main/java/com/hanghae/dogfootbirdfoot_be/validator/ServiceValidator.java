@@ -1,5 +1,11 @@
 package com.hanghae.dogfootbirdfoot_be.validator;
 
+import com.hanghae.dogfootbirdfoot_be.model.Comment;
+import jdk.nashorn.internal.runtime.options.Option;
+
+import java.util.HashMap;
+import java.util.Optional;
+
 public class ServiceValidator {
     public static void validateSearch(String category,String searchWord){
         if(category.isEmpty()||category.equals(null)){
@@ -33,6 +39,23 @@ public class ServiceValidator {
         }else if(comment.length()>300){
             throw new IllegalArgumentException("300자 이내로 작성해주세요.");
         }
+    }
+
+    // 22.04.13
+    // comment 타입 save 확인 hashmap 반환
+    public static HashMap<String,String> OptionalSaveChk(Comment comment){
+        HashMap<String,String> hashMap = new HashMap<>();
+        if(comment != null){
+            hashMap.put("result", "true");
+            hashMap.put("msg", "성공적으로 저장되었습니다.");
+            return hashMap;
+        }else{
+            hashMap.put("result", "false");
+            hashMap.put("msg", "저장에 실패하였습니다.");
+            return hashMap;
+        }
+
+
     }
 
 }

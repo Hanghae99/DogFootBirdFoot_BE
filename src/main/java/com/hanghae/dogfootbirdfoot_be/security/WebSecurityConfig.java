@@ -142,6 +142,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 메인 페이지
         skipPathList.add("GET,/api/board/**");
 
+
         skipPathList.add("GET,/");
         skipPathList.add("GET,/basic.js");
 

@@ -35,6 +35,12 @@ public class Comment extends Timestamped {
         this.postId = post;
 //        this.userId =
     }
+    public Comment(CommentRequestDto commentRequestDto, Post post, User user){
+        this.comments  =commentRequestDto.getComment();
+        this.postId = post;
+        this.userId = user;
+//        this.userId =
+    }
 
     // 댓글수정
     public void update(CommentRequestDto commentRequestDto){
