@@ -37,6 +37,7 @@ public class PostService {
 
 
         List<PostDto> postAll = new ArrayList<>();
+        //22.4.13 코멘트 수정
         for (Post post:posts){
             List<Comment> commentNum = commentRepository.findAllByPostId(post);
             int commentCount = commentNum.size();
@@ -50,6 +51,7 @@ public class PostService {
     @Transactional
     public PostRequestDto createPost(PostRequestDto postRequestDto, User user){
 //        Long userId = userDetails.getId;
+
         String postContents = postRequestDto.getPostContents();
         ServiceValidator.validatePostWrite(postContents);
         Post post = new Post(postRequestDto, user);

@@ -37,7 +37,7 @@ public class SearchService {
         List<PostDto> show = new ArrayList<>();
 
         //2차로 카테고리 동일한지 비교
-        //
+        //코멘트 추가 22.4.13
         for(Post result:results){
             if(category.equals(result.getCategory())){
                 List<Comment> commentNum = commentRepository.findAllByPostId(result);
