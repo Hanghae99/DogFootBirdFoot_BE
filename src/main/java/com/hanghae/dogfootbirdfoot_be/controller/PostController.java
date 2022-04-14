@@ -59,6 +59,9 @@ public class PostController {
     @JsonProperty("searchRequestDto")
     public List<PostDto> search(@RequestBody SearchRequestDto searchRequestDto){
         System.out.println("검색어  :" +searchRequestDto.getSearchWord());
+        // 수정
+        if(searchRequestDto.getCategory().equals("") || searchRequestDto.getCategory()== null){
+            searchRequestDto.setCategory("JAVA");}
         //서비스로 보내서 해결하기
         return searchService.search(searchRequestDto);
     }

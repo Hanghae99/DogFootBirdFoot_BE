@@ -1,10 +1,12 @@
 package com.hanghae.dogfootbirdfoot_be.service;
 
 import com.hanghae.dogfootbirdfoot_be.dto.SignupRequestDto;
+import com.hanghae.dogfootbirdfoot_be.dto.UserImageRequestDto;
 import com.hanghae.dogfootbirdfoot_be.model.Comment;
 import com.hanghae.dogfootbirdfoot_be.model.User;
 import com.hanghae.dogfootbirdfoot_be.repository.CommentRepositroy;
 import com.hanghae.dogfootbirdfoot_be.repository.UserRepository;
+import com.hanghae.dogfootbirdfoot_be.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -68,6 +70,16 @@ public class UserService {
             hashMap.put("result", "false");
             return hashMap;
         }
+
+    }
+
+
+    @Transactional
+    public void uploadUserImage(UserImageRequestDto userImageRequestDto, UserDetailsImpl userDetails){
+        User user = userRepository.findById(userDetails.getUser().getUserId()).orElseThrow(
+                ()-> new IllegalArgumentException("유저 정보가 없습니다.")
+        );
+        user.updateImgUrl(userImageRequestDto.getImageUrl());
 
     }
 }

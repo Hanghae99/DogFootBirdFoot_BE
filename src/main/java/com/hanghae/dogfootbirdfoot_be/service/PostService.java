@@ -85,8 +85,14 @@ public class PostService {
         Long writeUser = post.getUser().getUserId();
         // 로그인한 사람
         Long loginUser = user.getUserId();
+        System.out.println("게시글 작성한 사람 : " + writeUser);
+        System.out.println("로그인한 사람 : " + loginUser);
+        HashMap<String,String> hashMap = postDeleteAuthChk(writeUser,loginUser);
+        if(hashMap.get("result").equals("true")) {
+            postRepository.deleteById(postId);
 
-       return postDeleteAuthChk(writeUser,loginUser);
+        }
+       return hashMap;
 
     }
     //마이페이지 내 게시물 조회 2022-04-14

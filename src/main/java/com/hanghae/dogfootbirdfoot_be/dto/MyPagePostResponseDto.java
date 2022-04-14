@@ -2,9 +2,13 @@ package com.hanghae.dogfootbirdfoot_be.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.hanghae.dogfootbirdfoot_be.model.Post;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Setter
+@Getter
 public class MyPagePostResponseDto {
     private Long userId;
     private Long postId;
