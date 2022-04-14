@@ -4,7 +4,6 @@ package com.hanghae.dogfootbirdfoot_be.service;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.hanghae.dogfootbirdfoot_be.dto.PostImageRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,21 +26,19 @@ public class S3Uploader {
     @Value("${cloud.aws.s3.bucket}")
     public String bucket; // S3 버킷 이름
 
-    public PostImageRequestDto upload(MultipartFile getImageUrl, String dirName) throws IOException{
+    public String upload(MultipartFile getImageUrl, String dirName) throws IOException{
         File uploadFile = convert(getImageUrl) // 파일 변환할 수 없으면 에러
                 .orElseThrow(() -> new IllegalArgumentException("error: MultipartFile -> File convert fail"));
         return upload1(uploadFile, dirName);
     }
 
     // S3로 파일 업로드하기
-    public PostImageRequestDto upload1(File uploadFile, String dirName){
+    public String upload1(File uploadFile, String dirName){
         String fileName = dirName + "/" + UUID.randomUUID() + uploadFile.getName(); //S3에 저장된 파일 이름
         String uploadImageUrl = putS3(uploadFile, fileName); // S3로 업로드
         removeNewFile(uploadFile);
         System.out.println(uploadImageUrl);
-        PostImageRequestDto postImageRequestDto = new PostImageRequestDto(uploadImageUrl);
-        System.out.println(postImageRequestDto);
-        return postImageRequestDto;
+        return uploadImageUrl;
     }
 
     // S3로 업로드
