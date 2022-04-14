@@ -13,6 +13,8 @@ public class MyPagePostResponseDto {
     private Long userId;
     private Long postId;
     private String postTitle;
+    private String category;
+    private String postContents;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime createdAt;
 
@@ -21,6 +23,8 @@ public class MyPagePostResponseDto {
         this.postId=post.getId();
         this.postTitle=post.getPostTitle();
         this.createdAt = post.getCreatedAt();
+        this.category= post.getCategory();
+        this.postContents=getPostContents();
     }
 
 

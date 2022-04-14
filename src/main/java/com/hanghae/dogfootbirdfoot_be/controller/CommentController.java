@@ -45,6 +45,8 @@ public class CommentController {
     //22.4.13 댓글 삭제 수정
     @DeleteMapping("/api/post/detail/comment/{commentId}")
     public HashMap<String, String> deleteComment(@PathVariable Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        System.out.println("댓글 삭제 - > 댓글 번호 : "+ commentId);
+        System.out.println("댓글 삭제 - > 댓글 ");
         return commentService.deleteComment(commentId, userDetails.getUser().getUserId());
     }
 

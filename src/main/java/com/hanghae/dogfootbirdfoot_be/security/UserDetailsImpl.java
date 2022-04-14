@@ -27,7 +27,6 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        System.out.println("userDetails 에서 이름 뽑기"+user.getUsername());
         return user.getUsername();
     }
 
