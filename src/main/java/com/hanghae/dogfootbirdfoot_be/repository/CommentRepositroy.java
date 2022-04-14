@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface CommentRepositroy extends JpaRepository<Comment, Long> {
     List<Comment> findAllByPostId(Post post);
-  //  Page<Comment> findAllByUserOrderByCreatedAtDesc(User user, Pageable pageable);
-
+    List<Comment> findAllByUserId_UserId(Long userId);
 
 }

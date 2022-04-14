@@ -2,7 +2,6 @@ package com.hanghae.dogfootbirdfoot_be.model;
 
 
 import com.hanghae.dogfootbirdfoot_be.dto.CommentRequestDto;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +10,6 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-
 public class Comment extends Timestamped {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)

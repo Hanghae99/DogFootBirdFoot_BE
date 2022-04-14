@@ -1,9 +1,7 @@
 package com.hanghae.dogfootbirdfoot_be.service;
 
 
-import com.hanghae.dogfootbirdfoot_be.dto.CommentRequestDto;
-import com.hanghae.dogfootbirdfoot_be.dto.CommentResponseDto;
-import com.hanghae.dogfootbirdfoot_be.dto.CommentWriteResponseDto;
+import com.hanghae.dogfootbirdfoot_be.dto.*;
 import com.hanghae.dogfootbirdfoot_be.model.Comment;
 import com.hanghae.dogfootbirdfoot_be.model.Post;
 import com.hanghae.dogfootbirdfoot_be.model.User;
@@ -103,11 +101,17 @@ public class CommentService {
         }
     }
 
-    //내 댓글 조회 2022-04-13
-    public Comment getMycommentLists(Long userId) {
-        return commentRepositroy.findById(userId).orElseThrow(
-                NullPointerException::new
-        );
+    //마이페이지 내 댓글 조회 2022-04-14
+    public List<MyPageCommentResponseDto> getMycommentLists(Long userId) {
+        // 전체 내 댓글 조회
+        List<Comment> list = commentRepositroy.findAllByUserId_UserId(userId);
+        List<MyPageCommentResponseDto> responseDto = new ArrayList<>();
+
+        for (Comment one : list){
+            MyPageCommentResponseDto myPageCommentResponseDto = new MyPageCommentResponseDto(one);
+            responseDto.add(myPageCommentResponseDto);
+        }
+        return responseDto;
     }
 
 }
