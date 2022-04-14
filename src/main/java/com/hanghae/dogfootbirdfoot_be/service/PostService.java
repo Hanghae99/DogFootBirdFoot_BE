@@ -1,9 +1,6 @@
 package com.hanghae.dogfootbirdfoot_be.service;
 
-import com.hanghae.dogfootbirdfoot_be.dto.PostDeleteRequestDto;
-import com.hanghae.dogfootbirdfoot_be.dto.PostDto;
-import com.hanghae.dogfootbirdfoot_be.dto.PostRequestDto;
-import com.hanghae.dogfootbirdfoot_be.dto.PostResponseDto;
+import com.hanghae.dogfootbirdfoot_be.dto.*;
 import com.hanghae.dogfootbirdfoot_be.model.Comment;
 import com.hanghae.dogfootbirdfoot_be.model.Post;
 import com.hanghae.dogfootbirdfoot_be.model.User;
@@ -19,6 +16,8 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.hanghae.dogfootbirdfoot_be.validator.ServiceValidator.postDeleteAuthChk;
 
 @RequiredArgsConstructor
 @Service
@@ -76,30 +75,32 @@ public class PostService {
     }
 
 
-    //22.4.13 게시글 삭제 생성
+    //22.4.13 게시글 삭제
     @Transactional
-    public HashMap<String, String> deletePost(PostDeleteRequestDto postDeleteRequestDto){
-        HashMap<String, String> hashMap = new HashMap<>();
-        Post post = postRepository.findById(postDeleteRequestDto.getPostId()).orElseThrow(
+    public HashMap<String, String> deletePost(Long postId,User user){
+        Post post = postRepository.findById(postId).orElseThrow(
                 ()-> new IllegalArgumentException("게시글이 존재하지 않습니다.")
         );
-        if(post.getUser().getUserId().equals(postDeleteRequestDto.getUserId())){
-            postRepository.deleteById(postDeleteRequestDto.getPostId());
-            hashMap.put("result", "true");
-            hashMap.put("msg", "게시글이 삭제되었습니다.");
-            return hashMap;
-        }else {
-            hashMap.put("result", "false");
-            hashMap.put("msg", "게시글 삭제에 실패하였습니다");
-            return hashMap;
-        }
+        // 게시글을 작성한 사람
+        Long writeUser = post.getUser().getUserId();
+        // 로그인한 사람
+        Long loginUser = user.getUserId();
+
+       return postDeleteAuthChk(writeUser,loginUser);
 
     }
-    //마이페이지 내 게시물 조회 2022-04-13
-    public Post getMypostLists(Long userId) {
-        return postRepository.findById(userId).orElseThrow(
-                NullPointerException::new
-        );
+    //마이페이지 내 게시물 조회 2022-04-14
+    public List<MyPagePostResponseDto> getMypostLists(Long userId) {
+        // 전체 내 게시물 조회
+        List<Post> list =  postRepository.findAllByUser_UserId(userId);
+        List<MyPagePostResponseDto> responseDto = new ArrayList<>();
+
+        for(Post one : list){
+            MyPagePostResponseDto myPagePostResponseDto = new MyPagePostResponseDto(one);
+            responseDto.add(myPagePostResponseDto);
+        }
+        return responseDto;
+
     }
 
 
