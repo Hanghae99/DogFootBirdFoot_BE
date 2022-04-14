@@ -44,8 +44,8 @@ public class CommentController {
     // 댓글 삭제
     //22.4.13 댓글 삭제 수정
     @DeleteMapping("/api/post/detail/comment/{commentId}")
-    public HashMap<String, String> deleteComment(@PathVariable Long commentId, @RequestParam Long userId){
-        return commentService.deleteComment(commentId, userId);
+    public HashMap<String, String> deleteComment(@PathVariable Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return commentService.deleteComment(commentId, userDetails.getUser().getUserId());
     }
 
     //댓글 수정

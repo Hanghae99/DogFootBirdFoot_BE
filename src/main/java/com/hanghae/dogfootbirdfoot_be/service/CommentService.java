@@ -53,8 +53,9 @@ public class CommentService {
                 String nickname = comment.getUserId().getUsername();
                 String userProfile = comment.getUserId().getUserProfile();
                 String comments = comment.getComments();
+                Long commentId = comment.getId();
                 LocalDateTime createdAt = comment.getCreatedAt();
-                CommentResponseDto commentResponseDto = new CommentResponseDto(nickname, comments, userProfile, createdAt);
+                CommentResponseDto commentResponseDto = new CommentResponseDto(nickname,commentId, comments, userProfile, createdAt);
                 commentResponseDtos.add(commentResponseDto);
             }
             return commentResponseDtos;
@@ -68,7 +69,7 @@ public class CommentService {
        Comment comment = commentRepositroy.findById(commentId).orElseThrow(
                ()->new IllegalArgumentException("댓글이 존재하지 않습니다.")
        );
-       if(comment.getUserId().equals(userId)){
+       if(comment.getUserId().getUserId().equals(userId)){
            commentRepositroy.deleteById(commentId);
            hashMap.put("result", "true");
            hashMap.put("msg", "댓글이 삭제되었습니다.");

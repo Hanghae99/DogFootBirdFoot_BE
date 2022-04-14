@@ -20,5 +20,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Page<Post> findAllByUserOrderByCreatedAtDesc(User user, Pageable pageable);
 
+    // 내가 작성한 모든 글 가져오기
+    List<Post> findAllByUser_UserId(Long userId);
+
 
 }

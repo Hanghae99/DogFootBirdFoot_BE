@@ -54,8 +54,22 @@ public class ServiceValidator {
             hashMap.put("msg", "저장에 실패하였습니다.");
             return hashMap;
         }
-
-
     }
+
+    // 22.04.14
+    // 게시글 삭제, 권한 체크
+    public static HashMap<String,String> postDeleteAuthChk(Long writeUser, Long loginUser){
+        HashMap<String,String> hashMap = new HashMap<>();
+        if(writeUser.equals(loginUser)){
+            hashMap.put("result", "true");
+            hashMap.put("msg", "성공적으로 게시글이 삭제되었습니다.");
+            return hashMap;
+        }else{
+            hashMap.put("result", "false");
+            hashMap.put("msg", "삭제권한이 없습니다.");
+            return hashMap;
+        }
+    }
+    
 
 }

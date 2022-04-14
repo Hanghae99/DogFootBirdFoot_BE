@@ -1,6 +1,7 @@
 package com.hanghae.dogfootbirdfoot_be.controller;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hanghae.dogfootbirdfoot_be.dto.PostDto;
 import com.hanghae.dogfootbirdfoot_be.dto.PostRequestDto;
 import com.hanghae.dogfootbirdfoot_be.dto.PostResponseDto;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 @RequiredArgsConstructor
 @RestController
@@ -55,9 +55,10 @@ public class PostController {
     }
 
     //검색한 것 조회
-    @GetMapping("/api/board/search")
+    @PostMapping("/api/board/search")
+    @JsonProperty("searchRequestDto")
     public List<PostDto> search(@RequestBody SearchRequestDto searchRequestDto){
-
+        System.out.println("검색어  :" +searchRequestDto.getSearchWord());
         //서비스로 보내서 해결하기
         return searchService.search(searchRequestDto);
     }
@@ -66,7 +67,9 @@ public class PostController {
 //    //수정 파리미터로
 //    //검색한 것 조회 22.4.13
 //    @GetMapping("/api/board/search")
-//    public List<PostDto> search(@RequestParam String category, @RequestParam String searchWord){
+//    public List<PostDto> search(@RequestParam("category") String category, @RequestParam("searchWord") String searchWord){
+//        System.out.println("검색카테고리 :" + category);
+//        System.out.println("검색어      :" + searchWord);
 //        SearchRequestDto searchRequestDto = new SearchRequestDto();
 //        searchRequestDto.setCategory(category);
 //        searchRequestDto.setSearchWord(searchWord);
@@ -76,10 +79,14 @@ public class PostController {
 
 
     // 게시물 삭제 22.4.13 작성
-    @DeleteMapping("/api/post/delete")
-    public HashMap<String, String> deletePost(@RequestBody PostDeleteRequestDto postDeleteRequestDto){
-        System.out.println("게시글 아이디 : "+postDeleteRequestDto.getPostId());
-        System.out.println("유저 아이디   : "+postDeleteRequestDto.getUserId());
-        return postService.deletePost(postDeleteRequestDto);
+    @DeleteMapping("/api/post/delete/{postId}")
+    public HashMap<String, String> deletePost(
+            @PathVariable Long postId,
+            @AuthenticationPrincipal UserDetailsImpl userDetails
+    ){
+        System.out.println("게시글 아이디 : "+postId);
+        System.out.println("유저 아이디   : "+userDetails.getUser().getUserId());
+        User user = userDetails.getUser();
+        return postService.deletePost(postId,user);
     }
 }
